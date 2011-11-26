@@ -16,9 +16,11 @@ M.I18N.de_de = {
 
     stepBasics: 'Der CouchCup',
 
+    stepRules: 'Die Regeln',
+
     stepPlayers: 'Die Mitspieler',
 
-    stepShuffling: 'Die Auslösung',
+    stepShuffling: 'Die Auslosung',
 
     defaultCupName: 'Mein CouchCup ',
 

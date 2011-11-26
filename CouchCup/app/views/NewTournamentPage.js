@@ -40,7 +40,7 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                 cssClass: 'stepsList',
 
-                childViews: 'step1 step2 step3',
+                childViews: 'step1 step2 step3 step4',
 
                 events: {
 
@@ -68,13 +68,21 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                     value: '1',
 
-                    label: M.I18N.l('stepPlayers')
+                    label: M.I18N.l('stepRules')
 
                 }),
 
                 step3: M.SelectionListItemView.design({
 
                     value: '2',
+
+                    label: M.I18N.l('stepPlayers')
+
+                }),
+
+                step4: M.SelectionListItemView.design({
+
+                    value: '3',
 
                     label: M.I18N.l('stepShuffling')
 
@@ -94,7 +102,7 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                 cssClass: 'containers',
 
-                childViews: 'stepBasics stepPlayers stepShuffling',
+                childViews: 'stepBasics stepRules stepPlayers stepShuffling',
 
                 stepBasics: M.ContainerView.design({
 
@@ -266,6 +274,36 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                 }),
 
+                stepRules: M.ContainerView.design({
+
+                    cssClass: 'stepRulesContainer',
+
+                    childViews: 'title',
+
+                    title: M.LabelView.design({
+
+                        cssClass: 'title',
+
+                        computedValue: {
+
+                            value: M.I18N.l('stepRules'),
+
+                            operation: function(v) {
+
+                                if(v) {
+
+                                    return v.toUpperCase();
+
+                                }
+
+                            }
+
+                        }
+
+                    })
+
+                }),
+
                 stepPlayers: M.ContainerView.design({
 
                     cssClass: 'stepPlayersContainer',
@@ -298,7 +336,7 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                 stepShuffling: M.ContainerView.design({
 
-                    cssClass: 'stepPlayersContainer',
+                    cssClass: 'stepShufflingContainer',
 
                     childViews: 'title',
 

@@ -96,7 +96,7 @@
     position: relative;
 }
 
-.newTournamentPage .stepBasicsContainer, .newTournamentPage .stepPlayersContainer {
+.newTournamentPage .stepBasicsContainer, .newTournamentPage .stepRulesContainer, .newTournamentPage .stepPlayersContainer, .newTournamentPage .stepShufflingContainer {
     float: left;
 }
 
