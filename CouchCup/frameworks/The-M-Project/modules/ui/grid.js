@@ -37,6 +37,21 @@ M.THREE_COLUMNS = {
 };
 
 /**
+ * A constant value for a three column layout of a grid view.
+ *
+ * @type String
+ */
+M.FOUR_COLUMNS = {
+    cssClass: 'ui-grid-c',
+    columns: {
+        0: 'ui-block-a',
+        1: 'ui-block-b',
+        2: 'ui-block-c',
+        3: 'ui-block-d'
+    }
+};
+
+/**
  * @class
  *
  * M.GridView defines a prototype of a grid view, that allows you to display several
