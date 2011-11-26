@@ -12,6 +12,12 @@ CouchCup.ApplicationController = M.Controller.extend({
 
     mode: 'ko',
 
+    players: [],
+
+    numberOfPlayers: 0,
+
+    numberOfPlayersPerTeam: 1,
+
     stepSelected: function(value, item) {
 
         var containerWidth = (M.Math.round(CouchCup.LayoutController.width * 0.7));
@@ -38,7 +44,10 @@ CouchCup.ApplicationController = M.Controller.extend({
                 {
                     opacity: 1
                 },
-                duration/2
+                duration/2,
+                function() {
+                    CouchCup.LayoutController.resizePlayersContainer();
+                }
             );
         }, duration/2)
 
@@ -61,6 +70,77 @@ CouchCup.ApplicationController = M.Controller.extend({
 
             }
             
+        }
+
+    },
+
+    addPlayer: function(id) {
+
+        var textField = M.ViewManager.getViewById(id);
+        var username = textField.value;
+
+        if(!username) {
+            return;
+        }
+
+        textField.setValue('');
+
+        this.players.push(username);
+
+        this.set('numberOfPlayers', this.players.length);
+
+        var html = "";
+        _.each(this.players, function(player, key) {
+
+            html += '<div class="player" id="player_' + key + '">' + player + '</div>';
+
+        });
+
+        var playerContainer = M.ViewManager.getView('newTournamentPage', 'players');
+        $('#' + playerContainer.id).html(html);
+
+        var that = this;
+        _.each(this.players, function(player, key) {
+            $('#player_' + key).unbind().bind('tap', function(evt) {
+                CouchCup.UtilityController.confirm(
+                    'Möchtest du ' + player + ' löschen?',
+                    function(buttonIndex) {
+                        if(buttonIndex === 1) {
+                            _.each(that.players, function(pl, k) {
+                                if(player === pl) {
+                                    that.players.splice(k, 1);
+                                    $('#player_' + k).remove();
+                                }
+                            });
+                        }
+                    }
+                );
+            });
+        });
+    },
+
+    setPlayersPerTeam: function(id) {
+
+        var image = M.ViewManager.getViewById(id);
+        if(image && image.value) {
+
+            var grid = M.ViewManager.getView('newTournamentPage', 'inputRule1');
+            var numberOfPlayersPerTeam = Number(image.value.substr(image.value.lastIndexOf('player_') + 7, 1));
+            var imageCounter = 1;
+            var that = this;
+            
+            $('#' + grid.id).find('img').each(function() {
+                if(imageCounter++ === that.numberOfPlayersPerTeam) {
+                    $(this).attr('src', $(this).attr('src').substr(0, $(this).attr('src').lastIndexOf('_active')) + '.png');
+                    M.ViewManager.getViewById($(this).attr('id')).value = $(this).attr('src');
+                }
+            });
+
+            $('#' + image.id).attr('src', $('#' + image.id).attr('src').substr(0, $('#' + image.id).attr('src').length - 4) + '_active.png');
+            image.value = $('#' + image.id).attr('src');
+
+            this.numberOfPlayersPerTeam = numberOfPlayersPerTeam;
+
         }
 
     }

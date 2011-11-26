@@ -278,7 +278,7 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                     cssClass: 'stepRulesContainer',
 
-                    childViews: 'title',
+                    childViews: 'title labelRule1 inputRule1 labelRule2 inputRule2',
 
                     title: M.LabelView.design({
 
@@ -300,6 +300,128 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                         }
 
+                    }),
+
+                    labelRule1: M.LabelView.design({
+
+                        cssClass: 'label',
+
+                        value: M.I18N.l('infoInputRule1')
+
+                    }),
+
+                    inputRule1: M.GridView.design({
+
+                        layout: M.FOUR_COLUMNS,
+
+                        childViews: 'player1 player2 player3 player4',
+
+                        player1: M.ImageView.design({
+
+                            value: 'theme/images/player_1_active.png',
+
+                            events: {
+
+                                tap: {
+
+                                    target: CouchCup.ApplicationController,
+
+                                    action: 'setPlayersPerTeam'
+
+                                }
+
+                            }
+
+                        }),
+
+                        player2: M.ImageView.design({
+
+                            value: 'theme/images/player_2.png',
+
+                            events: {
+
+                                tap: {
+
+                                    target: CouchCup.ApplicationController,
+
+                                    action: 'setPlayersPerTeam'
+
+                                }
+
+                            }
+
+                        }),
+
+                        player3: M.ImageView.design({
+
+                            value: 'theme/images/player_3.png',
+
+                            events: {
+
+                                tap: {
+
+                                    target: CouchCup.ApplicationController,
+
+                                    action: 'setPlayersPerTeam'
+
+                                }
+
+                            }
+
+                        }),
+
+                        player4: M.ImageView.design({
+
+                            value: 'theme/images/player_4.png',
+
+                            events: {
+
+                                tap: {
+
+                                    target: CouchCup.ApplicationController,
+
+                                    action: 'setPlayersPerTeam'
+
+                                }
+
+                            }
+
+                        })
+
+                    }),
+
+                    labelRule2: M.LabelView.design({
+
+                        cssClass: 'label',
+
+                        value: M.I18N.l('infoInputRule2')
+
+                    }),
+
+                    inputRule2: M.SelectionListView.design({
+
+                        childViews: 'yes no',
+
+                        cssClass: 'hereAndThere',
+
+                        yes: M.SelectionListItemView.design({
+
+                            value: YES,
+
+                            label: M.I18N.l('hereAndThereYes'),
+
+                            isSelected: YES
+
+                        }),
+
+                        no: M.SelectionListItemView.design({
+
+                            value: NO,
+
+                            label: M.I18N.l('hereAndThereNo')
+
+                        })
+
                     })
 
                 }),
@@ -308,7 +430,7 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                     cssClass: 'stepPlayersContainer',
 
-                    childViews: 'title',
+                    childViews: 'title labelUsername inputUsername players',
 
                     title: M.LabelView.design({
 
@@ -329,6 +451,62 @@ CouchCup.NewTournamentPage = M.PageView.design({
                             }
 
                         }
+
+                    }),
+
+                    labelUsername: M.LabelView.design({
+
+                        cssClass: 'label',
+
+                        computedValue: {
+
+                            value: 0,
+
+                            contentBinding: {
+
+                                target: CouchCup.ApplicationController,
+
+                                property: 'numberOfPlayers'
+
+                            },
+
+                            operation: function(v) {
+
+                                return M.I18N.l('infoInputUsername1') + (++v) + M.I18N.l('infoInputUsername2');
+
+                            }
+
+                        }
+
+                    }),
+
+                    inputUsername: M.TextFieldView.design({
+
+                        cssClass: 'name',
+
+                        cssClassOnInit: 'initial',
+
+                        initialText: M.I18N.l('defaultUsername'),
+
+                        events: {
+
+                            enter: {
+
+                                target: CouchCup.ApplicationController,
+
+                                action: 'addPlayer'
+
+                            }
+
+                        },
+
+                        numberOfChars: 25
+
+                    }),
+
+                    players: M.ContainerView.design({
+
+                        cssClass: 'players'
 
                     })
 

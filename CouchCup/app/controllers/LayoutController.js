@@ -44,8 +44,14 @@ CouchCup.LayoutController = M.Controller.extend({
             });
             $('.newTournamentPage .containers').css('width', --stepCounter * M.Math.round(this.width * 0.7));
 
+            $('.newTournamentPage .containerAction .players').css('height', $('.newTournamentPage .containerAction').height() - $('.newTournamentPage .containerAction .players').position().top - 30 + 'px');
+
         }
 
+    },
+
+    resizePlayersContainer: function() {
+        $('.newTournamentPage .containerAction .players').css('height', $('.newTournamentPage .containerAction').height() - $('.newTournamentPage .containerAction .players').position().top - 30 + 'px');
     }
 
 });
