@@ -10,12 +10,12 @@ var CouchCup  = CouchCup || {};
 CouchCup.app = M.Application.design({
 
     /* Define the entry/start page of your app. This property must be provided! */
-    entryPage : 'page1',
+    entryPage : 'newTournamentPage',
 
-    page1: M.PageView.design({
+    newTournamentPage: CouchCup.NewTournamentPage,
 
-        //Add your code here!
+    historyPage: CouchCup.HistoryPage,
 
-    })
+    settingsPage: CouchCup.SettingsPage
 
 });
