@@ -42,8 +42,14 @@ M.I18N.de_de = {
 
     infoInputRule2: 'Werden Hin- und Rückspiele gepspielt?',
 
+    infoInputRule3: 'Soll CouchCup die Team automatisch zusammenstellen?',
+
     hereAndThereYes: 'Klar, wir möchten das volle Programm.',
 
-    hereAndThereNo: 'Nein, wir haben leider nicht so viel Zeit.'
+    hereAndThereNo: 'Nein, wir haben leider nicht so viel Zeit.',
+
+    createTeamsAutomaticallyYes: 'Auf jeden Fall! Automatic rockz!',
+
+    createTeamsAutomaticallyNo: 'Nein, das machen wir selbst.'
 
 }

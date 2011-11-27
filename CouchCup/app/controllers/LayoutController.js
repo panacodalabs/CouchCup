@@ -46,6 +46,9 @@ CouchCup.LayoutController = M.Controller.extend({
 
             $('.newTournamentPage .containerAction .players').css('height', $('.newTournamentPage .containerAction').height() - $('.newTournamentPage .containerAction .players').position().top - 30 + 'px');
 
+            $('#' + M.ViewManager.getView('newTournamentPage', 'labelRule3').id).hide();
+            $('#' + M.ViewManager.getView('newTournamentPage', 'inputRule3').id).hide();
+
         }
 
     },

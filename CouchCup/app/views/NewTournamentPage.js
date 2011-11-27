@@ -146,7 +146,15 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                         cssClassOnInit: 'initial',
 
-                        initialText: M.I18N.l('defaultCupName') + D8.now().format('yyyy-mm-dd')
+                        initialText: M.I18N.l('defaultCupName') + D8.now().format('yyyy-mm-dd'),
+
+                        contentBindingReverse: {
+
+                            target: CouchCup.ApplicationController,
+
+                            property: 'name'
+
+                        }
 
                     }),
 
@@ -278,7 +286,7 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                     cssClass: 'stepRulesContainer',
 
-                    childViews: 'title labelRule1 inputRule1 labelRule2 inputRule2',
+                    childViews: 'title labelRule1 inputRule1 labelRule2 inputRule2 labelRule3 inputRule3',
 
                     title: M.LabelView.design({
 
@@ -404,6 +412,22 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                         cssClass: 'hereAndThere',
 
+                        events: {
+
+                            change: {
+
+                                target: CouchCup.ApplicationController,
+
+                                action: function(value) {
+
+                                    this.set('playHereAndThere', value);
+
+                                }
+
+                            }
+
+                        },
+
                         yes: M.SelectionListItemView.design({
 
                             value: YES,
@@ -419,6 +443,56 @@ CouchCup.NewTournamentPage = M.PageView.design({
                             value: NO,
 
                             label: M.I18N.l('hereAndThereNo')
+
+                        })
+
+                    }),
+
+                    labelRule3: M.LabelView.design({
+
+                        cssClass: 'label',
+
+                        value: M.I18N.l('infoInputRule3')
+
+                    }),
+
+                    inputRule3: M.SelectionListView.design({
+
+                        childViews: 'yes no',
+
+                        cssClass: 'hereAndThere',
+
+                        events: {
+
+                            change: {
+
+                                target: CouchCup.ApplicationController,
+
+                                action: function(value) {
+
+                                    this.set('createTeamsAutomatically', value);
+
+                                }
+
+                            }
+
+                        },
+
+                        yes: M.SelectionListItemView.design({
+
+                            value: YES,
+
+                            label: M.I18N.l('createTeamsAutomaticallyYes'),
+
+                            isSelected: YES
+
+                        }),
+
+                        no: M.SelectionListItemView.design({
+
+                            value: NO,
+
+                            label: M.I18N.l('createTeamsAutomaticallyNo')
 
                         })
 
@@ -516,7 +590,7 @@ CouchCup.NewTournamentPage = M.PageView.design({
 
                     cssClass: 'stepShufflingContainer',
 
-                    childViews: 'title',
+                    childViews: 'title button label',
 
                     title: M.LabelView.design({
 
@@ -535,6 +609,36 @@ CouchCup.NewTournamentPage = M.PageView.design({
                                 }
 
                             }
+
+                        }
+
+                    }),
+
+                    button: M.ButtonView.design({
+
+                        value: 'start',
+
+                        events: {
+
+                            tap: {
+
+                                target: CouchCup.ApplicationController,
+
+                                action: 'startShuffling'
+
+                            }
+
+                        }
+
+                    }),
+
+                    label: M.LabelView.design({
+
+                        contentBinding: {
+
+                            target: CouchCup.ApplicationController,
+
+                            property: 'info'
 
                         }
 

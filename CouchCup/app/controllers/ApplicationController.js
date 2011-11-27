@@ -10,6 +10,8 @@ CouchCup.ApplicationController = M.Controller.extend({
 
     step: 0,
 
+    name: null,
+
     mode: 'ko',
 
     players: [],
@@ -17,6 +19,12 @@ CouchCup.ApplicationController = M.Controller.extend({
     numberOfPlayers: 0,
 
     numberOfPlayersPerTeam: 1,
+
+    playHereAndThere: YES,
+
+    createTeamsAutomatically: YES,
+
+    info: null,
 
     stepSelected: function(value, item) {
 
@@ -141,6 +149,42 @@ CouchCup.ApplicationController = M.Controller.extend({
 
             this.numberOfPlayersPerTeam = numberOfPlayersPerTeam;
 
+            if(this.numberOfPlayersPerTeam === 1) {
+                $('#' + M.ViewManager.getView('newTournamentPage', 'labelRule3').id).hide();
+                $('#' + M.ViewManager.getView('newTournamentPage', 'inputRule3').id).hide();
+            } else {
+                $('#' + M.ViewManager.getView('newTournamentPage', 'labelRule3').id).show();
+                $('#' + M.ViewManager.getView('newTournamentPage', 'inputRule3').id).show();
+            }
+
+        }
+
+    },
+
+    startShuffling: function() {
+
+//        var text = 'Turnier: ' + this.name + '<br/>' +
+//        'Modus: ' + this.mode + '<br/>' +
+//        'Spieler: ' + this.players + '<br/>' +
+//        'Spieler pro Team: ' + this.numberOfPlayersPerTeam + '<br/>' +
+//        'Hin- und Rückspiel: ' + this.playHereAndThere + '<br/>' +
+//        'Automatische Auslosung: ' + this.createTeamsAutomatically;
+//
+//        this.set('info', text);
+
+        this.createTeams();
+        
+    },
+
+    createTeams: function() {
+
+        var players = _.shuffle(this.players);
+        for(var i = 0; i < this.players.length; i += this.numberOfPlayersPerTeam) {
+            var playerNames = '';
+            for(var j = 0; j < this.numberOfPlayersPerTeam; j++) {
+                playerNames += players[i + j] + ((j + 1) !== this.numberOfPlayersPerTeam ? ', ' : '');
+            }
+            console.log('Team ' + '#' + ((i / this.numberOfPlayersPerTeam) + 1) + ': ' + playerNames);
         }
 
     }
